@@ -20,7 +20,7 @@
                 <handler>
                     <![CDATA[
                     function(button) {
-                        fetch('/backend/test/index')
+                        fetch('/backend/ordering/index')
                         .then(response => response.text())
                         .then(data => Shopware.Notification.createStickyGrowlMessage({title: 'Response', text: data}))
                         .catch(err => {

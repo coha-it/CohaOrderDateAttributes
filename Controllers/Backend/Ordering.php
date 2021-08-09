@@ -2,7 +2,7 @@
 
 use Shopware\Components\CSRFWhitelistAware;
 
-class Shopware_Controllers_Backend_Test extends \Enlight_Controller_Action implements CSRFWhitelistAware
+class Shopware_Controllers_Backend_Ordering extends \Enlight_Controller_Action implements CSRFWhitelistAware
 {
     public function indexAction()
     {
@@ -13,12 +13,19 @@ class Shopware_Controllers_Backend_Test extends \Enlight_Controller_Action imple
         $queryBuilder = $this->container->get('dbal_connection')->createQueryBuilder();
         $table = 's_filter_values';
 
+        // Config ID
+        $configId = $config['id'];
+
+        if(!$configId) {
+            die("Error! No Config-ID");
+        }
+
         // DB-Select
         try {
             $queryBuilder->select('*')
                 ->from($table)
                 ->where('optionID = :id')
-                ->setParameter('id', $config['id']);
+                ->setParameter('id', $configId);
             $data = $queryBuilder->execute()->fetchAll();
 
             // Repositioning
