@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element required="true" type="number" scope="locale">
+            <name>id</name>
+            <label lang="de">Option-ID</label>
+            <label lang="en">Option-ID</label>
+            <value>preselection</value>
+            <description lang="de">Das Option-ID, welches nach Datum sortiert werden soll hier eingeben. Sollte in der Datenbank zu finden sein. (default: 4)</description>
+            <description lang="en">The option-ID for the attribute which should be sorted by date. You can find this inside the Database (default: 4)</description>
+        </element>
+
+
+        <element type="button" scope="locale">
+            <name>sortAttributes</name>
+            <label lang="de">Sortieren</label>
+            <label lang="en">Sort</label>
+            <options>
+                <handler>
+                    <![CDATA[
+                    function(button) {
+                        fetch('/backend/test/index')
+                        .then(response => response.text())
+                        .then(data => Shopware.Notification.createStickyGrowlMessage({title: 'Response', text: data}))
+                        .catch(err => {
+                            console.log("u")
+                            alert("sorry, there are no results for your search")
+                        });
+                    }
+                    ]]>
+                </handler>
+            </options>
+        </element>
+
+    </elements>
+</config>
